@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+numpy
+scipy
+indic-transliteration
+python-multipart
+soundfile
+gTTS
+pydub
+# ffmpeg must be installed separately for pydub MP3 support:
+#   Windows: https://www.gyan.dev/ffmpeg/builds/ → add bin/ to PATH
+#   macOS:   brew install ffmpeg
+#   Linux:   sudo apt install ffmpeg
