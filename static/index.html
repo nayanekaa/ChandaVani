@@ -1,642 +1,1279 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>ChandaVani — Sanskrit Melodic Recitation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg:      #f3ebe1;
-  --surface: #fffdf8;
-  --card:    #fff4e1;
-  --border:  #dcc1a7;
-  --border2: #ceb49a;
-  --gold:    #2f4972;
-  --gold2:   #1f2f4f;
-  --saffron: #bf5b1d;
-  --saffron2:#e07530;
-  --teal:    #396380;
-  --text:    #21416a;
-  --muted:   #5f6f89;
-  --guru:    #5f6f89;
-  --laghu:   #2f4972;
-  --radius:  16px;
-  --ff:      'Merriweather', 'Segoe UI', system-ui, serif;
-  --ff-dev:  'Noto Serif Devanagari', serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:var(--ff);min-height:100vh;line-height:1.45}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>ChandaVani — Sanskrit Melodic Recitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f3ebe1;
+      --surface: #fffdf8;
+      --card: #fff4e1;
+      --border: #dcc1a7;
+      --border2: #ceb49a;
+      --gold: #2f4972;
+      --gold2: #1f2f4f;
+      --saffron: #bf5b1d;
+      --saffron2: #e07530;
+      --teal: #396380;
+      --text: #21416a;
+      --muted: #5f6f89;
+      --guru: #5f6f89;
+      --laghu: #2f4972;
+      --radius: 16px;
+      --ff: 'Merriweather', 'Segoe UI', system-ui, serif;
+      --ff-dev: 'Noto Serif Devanagari', serif;
+    }
 
-/* ── Decorative top stripe ── */
-.top-stripe{
-  height:4px;
-  background:linear-gradient(90deg,#bf5b1d,#2f4972,#396380,#bf5b1d);
-  background-size:200% 100%;
-  animation:stripeScroll 6s linear infinite;
-}
-@keyframes stripeScroll{0%{background-position:0%}100%{background-position:200%}}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-/* ── Header ── */
-header{
-  padding:1.4rem 2rem 1.2rem;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:1.2rem;
-  background:linear-gradient(100deg,#fffefc,#f7efe1 60%,#eee4d5);
-  position:relative;overflow:hidden;
-}
-header::before{
-  content:"ॐ";
-  position:absolute;right:-10px;top:50%;transform:translateY(-50%);
-  font-family:var(--ff-dev);font-size:7rem;color:rgba(47,73,114,.06);
-  line-height:1;pointer-events:none;user-select:none;
-}
-.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:.1rem}
-.logo{font-size:2.2rem;line-height:1}
-.logo-sub{font-size:.5rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);font-weight:600}
-header h1{font-size:2rem;color:var(--gold2);font-weight:700;letter-spacing:.04em;margin-bottom:.15rem}
-header p{font-size:.85rem;color:var(--muted);margin-top:.1rem}
-.header-badge{
-  margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:.35rem;
-}
-.badge{
-  font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  padding:.25rem .6rem;border-radius:999px;white-space:nowrap;
-}
-.badge-saffron{background:rgba(191,91,29,.12);color:var(--saffron);border:1px solid rgba(191,91,29,.3)}
-.badge-blue{background:rgba(47,73,114,.1);color:var(--gold2);border:1px solid rgba(47,73,114,.25)}
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff);
+      min-height: 100vh;
+      line-height: 1.45
+    }
 
-/* ── Layout ── */
-main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1.5rem}
+    /* ── Decorative top stripe ── */
+    .top-stripe {
+      height: 4px;
+      background: linear-gradient(90deg, #bf5b1d, #2f4972, #396380, #bf5b1d);
+      background-size: 200% 100%;
+      animation: stripeScroll 6s linear infinite;
+    }
 
-/* ── Ornamental divider ── */
-.om-divider{
-  display:flex;align-items:center;gap:1rem;
-  color:var(--border2);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;
-}
-.om-divider::before,.om-divider::after{
-  content:"";flex:1;height:1px;
-  background:linear-gradient(90deg,transparent,var(--border2),transparent);
-}
-.om-glyph{
-  font-family:var(--ff-dev);font-size:1.1rem;color:var(--saffron);opacity:.7;
-  animation:glyphPulse 4s ease-in-out infinite;
-}
-@keyframes glyphPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.9;transform:scale(1.08)}}
+    @keyframes stripeScroll {
+      0% {
+        background-position: 0%
+      }
 
-/* ── Cards ── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;box-shadow:0 6px 16px rgba(0,0,0,.07)}
-.card-title{
-  font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--gold2);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem
-}
+      100% {
+        background-position: 200%
+      }
+    }
 
-/* ── Verse of the day banner ── */
-.votd-card{
-  background:linear-gradient(135deg,#1f2f4f 0%,#2f4972 55%,#396380 100%);
-  border:none;color:#fff;border-radius:var(--radius);padding:1.5rem 2rem;
-  box-shadow:0 8px 24px rgba(31,47,79,.3);position:relative;overflow:hidden;
-}
-.votd-card::before{
-  content:"";position:absolute;inset:0;
-  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  pointer-events:none;
-}
-.votd-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;opacity:.6;margin-bottom:.6rem}
-.votd-verse{
-  font-family:var(--ff-dev);font-size:1.25rem;line-height:1.85;font-weight:600;
-  margin-bottom:.75rem;text-shadow:0 1px 4px rgba(0,0,0,.3);
-}
-.votd-translation{font-size:.78rem;opacity:.75;font-style:italic;line-height:1.6}
-.votd-source{
-  display:inline-block;margin-top:.65rem;font-size:.65rem;letter-spacing:.1em;
-  background:rgba(255,255,255,.12);padding:.2rem .6rem;border-radius:4px;
-}
-.votd-om{
-  position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);
-  font-family:var(--ff-dev);font-size:5rem;opacity:.08;line-height:1;
-  pointer-events:none;user-select:none;
-}
+    /* ── Header ── */
+    header {
+      padding: 1.4rem 2rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      background: linear-gradient(100deg, #fffefc, #f7efe1 60%, #eee4d5);
+      position: relative;
+      overflow: hidden;
+    }
 
-/* ── Input area ── */
-.input-grid{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:start}
-textarea{
-  width:100%;min-height:100px;background:#fff; border:1px solid #d7c7ae;
-  border-radius:12px;color:#2c3e5e;font-size:1.05rem;padding:.9rem 1rem;
-  resize:vertical;outline:none;font-family:var(--ff-dev);line-height:1.7;
-  transition:border-color .15s,box-shadow .15s;
-  box-shadow:inset 0 0 0 1px rgba(160,145,130,.35);
-}
-textarea:focus{border-color:var(--gold2);box-shadow:0 0 0 0.2rem rgba(47,73,114,.18)}
-textarea::placeholder{color:var(--muted);font-family:var(--ff)}
+    header::before {
+      content: "ॐ";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--ff-dev);
+      font-size: 7rem;
+      color: rgba(47, 73, 114, .06);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
 
-.controls-col{display:flex;flex-direction:column;gap:.75rem;min-width:220px}
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .1rem
+    }
 
-/* ── Chanda selector ── */
-select{
-  width:100%;background:#120a02;border:1px solid var(--border);border-radius:8px;
-  color:var(--text);padding:.55rem .85rem;font-size:.85rem;outline:none;cursor:pointer
-}
-select:focus{border-color:var(--gold)}
+    .logo {
+      font-size: 2.2rem;
+      line-height: 1
+    }
 
-/* ── Buttons ── */
-.btn-recite{
-  width:100%;padding:.8rem;border-radius:10px;border:none;cursor:pointer;
-  background:linear-gradient(135deg,#2f4972,#1f2f4f);color:#fff;
-  font-size:1rem;font-weight:700;letter-spacing:.03em;transition:transform .15s,opacity .15s,box-shadow .15s;
-  box-shadow:0 4px 14px rgba(31,47,79,.3);
-}
-.btn-recite:hover{opacity:.92;transform:translateY(-2px);box-shadow:0 6px 18px rgba(31,47,79,.4)}
-.btn-recite:active{transform:translateY(0)}
-.btn-recite:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    .logo-sub {
+      font-size: .5rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600
+    }
 
-/* ── Audio player ── */
-.audio-wrap{
-  display:none;flex-direction:column;gap:.75rem;align-items:center;
-  padding:1rem;background:#120a02;border-radius:8px;border:1px solid var(--border)
-}
-.audio-wrap.visible{display:flex}
-audio{width:100%;border-radius:6px}
-.audio-meta{display:flex;gap:1.5rem;font-size:.75rem;color:var(--muted);flex-wrap:wrap;justify-content:center}
-.audio-meta span{display:flex;align-items:center;gap:.3rem}
+    header h1 {
+      font-size: 2rem;
+      color: var(--gold2);
+      font-weight: 700;
+      letter-spacing: .04em;
+      margin-bottom: .15rem
+    }
 
-/* ── Analysis grid ── */
-.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-.analysis-grid.full{grid-template-columns:1fr}
+    header p {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: .1rem
+    }
 
-/* ── Syllable strip ── */
-.syllable-strip{display:flex;flex-wrap:wrap;gap:.35rem;padding:.25rem 0}
-.syl-chip{
-  display:flex;flex-direction:column;align-items:center;gap:2px;
-  cursor:default;user-select:none
-}
-.syl-text{
-  padding:.3rem .6rem;border-radius:6px;font-size:.95rem;font-weight:600;
-  transition:transform .1s;font-family:var(--ff-dev)
-}
-.syl-text:hover{transform:scale(1.08)}
-.syl-weight{font-size:.6rem;font-weight:700;letter-spacing:.04em}
-.chip-G .syl-text{background:rgba(232,168,64,.15);border:1px solid var(--guru);color:var(--guru)}
-.chip-G .syl-weight{color:var(--guru)}
-.chip-L .syl-text{background:rgba(91,191,207,.12);border:1px solid var(--laghu);color:var(--laghu)}
-.chip-L .syl-weight{color:var(--laghu)}
-.chip-sep{width:1px;background:var(--border2);margin:0 .15rem;align-self:stretch}
+    .header-badge {
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: .35rem;
+    }
 
-.gl-pattern{
-  font-family:monospace;font-size:.95rem;letter-spacing:.18em;
-  padding:.4rem 0;color:var(--muted)
-}
-.gl-G{color:var(--guru)}
-.gl-L{color:var(--laghu)}
+    .badge {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .25rem .6rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
 
-/* ── Chanda matches (no bars) ── */
-.match-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.65rem .7rem;border-radius:8px;margin-bottom:.4rem;
-  border:1px solid transparent;transition:background .2s,border-color .2s;
-}
-.match-row:hover{background:#f8f5ef}
-.match-row.selected{
-  background:#f0edf7;
-  border-color:#2f4972;
-}
-.match-name{font-size:.9rem;font-weight:700;color:#1f2f4f}
-.match-desc{font-size:.75rem;color:var(--muted);margin-top:.12rem}
-.match-badge{
-  font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  padding:.22rem .55rem;border-radius:999px;white-space:nowrap;flex-shrink:0;
-}
-.match-badge.detected{background:rgba(47,73,114,.1);color:var(--gold2);border:1px solid rgba(47,73,114,.3)}
-.match-badge.alt{background:rgba(144,144,144,.08);color:var(--muted);border:1px solid var(--border)}
+    .badge-saffron {
+      background: rgba(191, 91, 29, .12);
+      color: var(--saffron);
+      border: 1px solid rgba(191, 91, 29, .3)
+    }
 
-/* ── Note Map (Sa Re Ga Ma Pa) ── */
-.note-map{
-  display:flex;flex-wrap:wrap;gap:.45rem;padding:.25rem 0;
-}
-.note-pair{
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  cursor:default;
-}
-.note-pair-syll{
-  font-family:var(--ff-dev);font-size:.92rem;font-weight:600;
-  padding:.28rem .55rem;border-radius:7px;
-  background:rgba(47,73,114,.07);border:1px solid rgba(47,73,114,.18);
-  color:var(--gold2);min-width:2.2rem;text-align:center;
-  transition:transform .12s;
-}
-.note-pair-syll:hover{transform:scale(1.1)}
-.note-pair-note{
-  font-size:.68rem;font-weight:700;letter-spacing:.04em;
-  color:var(--saffron);text-align:center;
-}
-.note-pair-hz{
-  font-size:.56rem;color:var(--muted);text-align:center;
-}
-.note-map-sep{
-  width:1px;background:var(--border2);margin:0 .1rem;align-self:stretch;
-  opacity:.5;
-}
+    .badge-blue {
+      background: rgba(47, 73, 114, .1);
+      color: var(--gold2);
+      border: 1px solid rgba(47, 73, 114, .25)
+    }
 
-/* ── Raga card ── */
-.raga-info{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 1.2rem}
-.raga-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.2rem}
-.raga-value{font-size:.85rem;color:var(--text)}
-.note-seq{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.3rem}
-.note-chip{
-  padding:.18rem .55rem;border-radius:4px;font-size:.72rem;font-weight:600;
-  background:rgba(201,164,74,.12);border:1px solid rgba(201,164,74,.3);color:var(--gold)
-}
+    /* ── Layout ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem
+    }
 
-/* ── Stats row ── */
-.stats-row{display:flex;gap:1rem;flex-wrap:wrap}
-.stat-box{
-  flex:1;min-width:80px;background:#fff;border:1px solid #e0d4c5;
-  border-radius:10px;padding:.65rem .75rem;text-align:center;box-shadow:0 3px 8px rgba(85,80,74,.06)
-}
-.stat-num{font-size:1.35rem;font-weight:700;color:#2f4972;line-height:1}
-.stat-lbl{font-size:.65rem;color:var(--muted);margin-top:.25rem;text-transform:uppercase;letter-spacing:.06em}
+    /* ── Ornamental divider ── */
+    .om-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--border2);
+      font-size: .75rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
 
-/* ── Legend ── */
-.legend{display:flex;gap:1rem;font-size:.72rem;color:var(--muted);margin-bottom:.6rem}
-.legend-dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:.3rem}
+    .om-divider::before,
+    .om-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border2), transparent);
+    }
 
-/* ── Loading ── */
-.spinner{
-  display:inline-block;width:16px;height:16px;border:2px solid var(--border);
-  border-top-color:var(--saffron);border-radius:50%;animation:spin .7s linear infinite;
-  vertical-align:middle;margin-right:.5rem
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-.status{font-size:.82rem;color:var(--muted);text-align:center;display:none;padding:.5rem}
+    .om-glyph {
+      font-family: var(--ff-dev);
+      font-size: 1.1rem;
+      color: var(--saffron);
+      opacity: .7;
+      animation: glyphPulse 4s ease-in-out infinite;
+    }
 
-/* ── Empty state ── */
-.empty{text-align:center;color:var(--muted);font-size:.82rem;padding:1.5rem;display:flex;
-  flex-direction:column;align-items:center;gap:.5rem}
-.empty-icon{font-size:1.5rem;opacity:.4}
+    @keyframes glyphPulse {
 
-/* ── Chanda Info Cards ── */
-.chanda-facts-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;
-}
-.fact-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:12px;
-  padding:1.1rem 1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.05);
-  transition:transform .2s,box-shadow .2s;
-  display:flex;flex-direction:column;gap:.4rem;
-}
-.fact-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.09)}
-.fact-meter{
-  font-family:var(--ff-dev);font-size:1.15rem;font-weight:700;color:var(--gold2);
-  display:flex;align-items:center;gap:.5rem
-}
-.fact-meter-icon{font-size:1.1rem}
-.fact-pattern{
-  font-family:monospace;font-size:.78rem;letter-spacing:.14em;
-  color:var(--saffron);background:rgba(191,91,29,.06);
-  padding:.2rem .5rem;border-radius:4px;display:inline-block;width:fit-content;
-}
-.fact-syllables{font-size:.7rem;color:var(--muted)}
-.fact-example{font-size:.72rem;color:var(--teal);font-style:italic;margin-top:.2rem}
+      0%,
+      100% {
+        opacity: .5;
+        transform: scale(1)
+      }
 
-/* ── Vedic notation strip ── */
-.svara-strip{
-  display:flex;align-items:stretch;border-radius:10px;overflow:hidden;
-  border:1px solid var(--border);margin-top:.5rem;
-}
-.svara-cell{
-  flex:1;text-align:center;padding:.6rem .4rem;display:flex;flex-direction:column;gap:.25rem;
-}
-.svara-cell:not(:last-child){border-right:1px solid var(--border)}
-.svara-cell.anudatta{background:rgba(95,111,137,.08)}
-.svara-cell.svarita{background:rgba(57,99,128,.08)}
-.svara-cell.udatta{background:rgba(47,73,114,.12)}
-.svara-sym{font-size:1.1rem}
-.svara-name{font-family:var(--ff-dev);font-size:.8rem;font-weight:600;color:var(--gold2)}
-.svara-meaning{font-size:.62rem;color:var(--muted);letter-spacing:.04em}
-.svara-arrow{font-size:1rem;color:var(--saffron)}
+      50% {
+        opacity: .9;
+        transform: scale(1.08)
+      }
+    }
 
-/* ── Footer ── */
-footer{
-  text-align:center;padding:1.5rem;
-  border-top:1px solid var(--border);
-  color:var(--muted);font-size:.72rem;line-height:1.8;
-  background:linear-gradient(0deg,#f7efe1,var(--bg));
-}
-footer .f-om{font-family:var(--ff-dev);font-size:1.1rem;color:var(--saffron);opacity:.8;margin-bottom:.3rem}
+    /* ── Cards ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, .07)
+    }
 
-/* ── Tooltip ── */
-[title]{cursor:help}
+    .card-title {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      margin-bottom: .9rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem
+    }
 
-@media(max-width:720px){
-  .input-grid{grid-template-columns:1fr}
-  .controls-col{flex-direction:row;flex-wrap:wrap}
-  .analysis-grid{grid-template-columns:1fr}
-  .header-badge{display:none}
-  header::before{display:none}
-}
-</style>
+    /* ── Verse of the day banner ── */
+    .votd-card {
+      background: linear-gradient(135deg, #1f2f4f 0%, #2f4972 55%, #396380 100%);
+      border: none;
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      box-shadow: 0 8px 24px rgba(31, 47, 79, .3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .votd-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .votd-label {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .6;
+      margin-bottom: .6rem
+    }
+
+    .votd-verse {
+      font-family: var(--ff-dev);
+      font-size: 1.25rem;
+      line-height: 1.85;
+      font-weight: 600;
+      margin-bottom: .75rem;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+    }
+
+    .votd-translation {
+      font-size: .78rem;
+      opacity: .75;
+      font-style: italic;
+      line-height: 1.6
+    }
+
+    .votd-source {
+      display: inline-block;
+      margin-top: .65rem;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      background: rgba(255, 255, 255, .12);
+      padding: .2rem .6rem;
+      border-radius: 4px;
+    }
+
+    .votd-om {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--ff-dev);
+      font-size: 5rem;
+      opacity: .08;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── Input area ── */
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      background: #fff;
+      border: 1px solid #d7c7ae;
+      border-radius: 12px;
+      color: #2c3e5e;
+      font-size: 1.05rem;
+      padding: .9rem 1rem;
+      resize: vertical;
+      outline: none;
+      font-family: var(--ff-dev);
+      line-height: 1.7;
+      transition: border-color .15s, box-shadow .15s;
+      box-shadow: inset 0 0 0 1px rgba(160, 145, 130, .35);
+    }
+
+    textarea:focus {
+      border-color: var(--gold2);
+      box-shadow: 0 0 0 0.2rem rgba(47, 73, 114, .18)
+    }
+
+    textarea::placeholder {
+      color: var(--muted);
+      font-family: var(--ff)
+    }
+
+    .controls-col {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      min-width: 220px
+    }
+
+    /* ── Chanda selector ── */
+    select {
+      width: 100%;
+      background: #120a02;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: .55rem .85rem;
+      font-size: .85rem;
+      outline: none;
+      cursor: pointer
+    }
+
+    select:focus {
+      border-color: var(--gold)
+    }
+
+    /* ── Buttons ── */
+    .btn-recite {
+      width: 100%;
+      padding: .8rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #2f4972, #1f2f4f);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      transition: transform .15s, opacity .15s, box-shadow .15s;
+      box-shadow: 0 4px 14px rgba(31, 47, 79, .3);
+    }
+
+    .btn-recite:hover {
+      opacity: .92;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(31, 47, 79, .4)
+    }
+
+    .btn-recite:active {
+      transform: translateY(0)
+    }
+
+    .btn-recite:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    /* ── Audio player ── */
+    .audio-wrap {
+      display: none;
+      flex-direction: column;
+      gap: .75rem;
+      align-items: center;
+      padding: 1rem;
+      background: #120a02;
+      border-radius: 8px;
+      border: 1px solid var(--border)
+    }
+
+    .audio-wrap.visible {
+      display: flex
+    }
+
+    audio {
+      width: 100%;
+      border-radius: 6px
+    }
+
+    .audio-meta {
+      display: flex;
+      gap: 1.5rem;
+      font-size: .75rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+      justify-content: center
+    }
+
+    .audio-meta span {
+      display: flex;
+      align-items: center;
+      gap: .3rem
+    }
+
+    /* ── Analysis grid ── */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem
+    }
+
+    .analysis-grid.full {
+      grid-template-columns: 1fr
+    }
+
+    /* ── Syllable strip ── */
+    .syllable-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      padding: .25rem 0
+    }
+
+    .syl-chip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      cursor: default;
+      user-select: none
+    }
+
+    .syl-text {
+      padding: .3rem .6rem;
+      border-radius: 6px;
+      font-size: .95rem;
+      font-weight: 600;
+      transition: transform .1s;
+      font-family: var(--ff-dev)
+    }
+
+    .syl-text:hover {
+      transform: scale(1.08)
+    }
+
+    .syl-weight {
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .04em
+    }
+
+    .chip-G .syl-text {
+      background: rgba(232, 168, 64, .15);
+      border: 1px solid var(--guru);
+      color: var(--guru)
+    }
+
+    .chip-G .syl-weight {
+      color: var(--guru)
+    }
+
+    .chip-L .syl-text {
+      background: rgba(91, 191, 207, .12);
+      border: 1px solid var(--laghu);
+      color: var(--laghu)
+    }
+
+    .chip-L .syl-weight {
+      color: var(--laghu)
+    }
+
+    .chip-sep {
+      width: 1px;
+      background: var(--border2);
+      margin: 0 .15rem;
+      align-self: stretch
+    }
+
+    .gl-pattern {
+      font-family: monospace;
+      font-size: .95rem;
+      letter-spacing: .18em;
+      padding: .4rem 0;
+      color: var(--muted)
+    }
+
+    .gl-G {
+      color: var(--guru)
+    }
+
+    .gl-L {
+      color: var(--laghu)
+    }
+
+    /* ── Chanda matches (no bars) ── */
+    .match-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .65rem .7rem;
+      border-radius: 8px;
+      margin-bottom: .4rem;
+      border: 1px solid transparent;
+      transition: background .2s, border-color .2s;
+    }
+
+    .match-row:hover {
+      background: #f8f5ef
+    }
+
+    .match-row.selected {
+      background: #f0edf7;
+      border-color: #2f4972;
+    }
+
+    .match-name {
+      font-size: .9rem;
+      font-weight: 700;
+      color: #1f2f4f
+    }
+
+    .match-desc {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: .12rem
+    }
+
+    .match-badge {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .22rem .55rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .match-badge.detected {
+      background: rgba(47, 73, 114, .1);
+      color: var(--gold2);
+      border: 1px solid rgba(47, 73, 114, .3)
+    }
+
+    .match-badge.alt {
+      background: rgba(144, 144, 144, .08);
+      color: var(--muted);
+      border: 1px solid var(--border)
+    }
+
+    /* ── Note Map (Sa Re Ga Ma Pa) ── */
+    .note-map {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      padding: .25rem 0;
+    }
+
+    .note-pair {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: default;
+    }
+
+    .note-pair-syll {
+      font-family: var(--ff-dev);
+      font-size: .92rem;
+      font-weight: 600;
+      padding: .28rem .55rem;
+      border-radius: 7px;
+      background: rgba(47, 73, 114, .07);
+      border: 1px solid rgba(47, 73, 114, .18);
+      color: var(--gold2);
+      min-width: 2.2rem;
+      text-align: center;
+      transition: transform .12s;
+    }
+
+    .note-pair-syll:hover {
+      transform: scale(1.1)
+    }
+
+    .note-pair-note {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      color: var(--saffron);
+      text-align: center;
+    }
+
+    .note-pair-hz {
+      font-size: .56rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .note-map-sep {
+      width: 1px;
+      background: var(--border2);
+      margin: 0 .1rem;
+      align-self: stretch;
+      opacity: .5;
+    }
+
+    /* ── Raga card ── */
+    .raga-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem 1.2rem
+    }
+
+    .raga-label {
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      margin-bottom: .2rem
+    }
+
+    .raga-value {
+      font-size: .85rem;
+      color: var(--text)
+    }
+
+    .note-seq {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .3rem;
+      margin-top: .3rem
+    }
+
+    .note-chip {
+      padding: .18rem .55rem;
+      border-radius: 4px;
+      font-size: .72rem;
+      font-weight: 600;
+      background: rgba(201, 164, 74, .12);
+      border: 1px solid rgba(201, 164, 74, .3);
+      color: var(--gold)
+    }
+
+    /* ── Stats row ── */
+    .stats-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap
+    }
+
+    .stat-box {
+      flex: 1;
+      min-width: 80px;
+      background: #fff;
+      border: 1px solid #e0d4c5;
+      border-radius: 10px;
+      padding: .65rem .75rem;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(85, 80, 74, .06)
+    }
+
+    .stat-num {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #2f4972;
+      line-height: 1
+    }
+
+    .stat-lbl {
+      font-size: .65rem;
+      color: var(--muted);
+      margin-top: .25rem;
+      text-transform: uppercase;
+      letter-spacing: .06em
+    }
+
+    /* ── Legend ── */
+    .legend {
+      display: flex;
+      gap: 1rem;
+      font-size: .72rem;
+      color: var(--muted);
+      margin-bottom: .6rem
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      margin-right: .3rem
+    }
+
+    /* ── Loading ── */
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border);
+      border-top-color: var(--saffron);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: .5rem
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .status {
+      font-size: .82rem;
+      color: var(--muted);
+      text-align: center;
+      display: none;
+      padding: .5rem
+    }
+
+    /* ── Empty state ── */
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      font-size: .82rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem
+    }
+
+    .empty-icon {
+      font-size: 1.5rem;
+      opacity: .4
+    }
+
+    /* ── Chanda Info Cards ── */
+    .chanda-facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .fact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .05);
+      transition: transform .2s, box-shadow .2s;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    .fact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .09)
+    }
+
+    .fact-meter {
+      font-family: var(--ff-dev);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold2);
+      display: flex;
+      align-items: center;
+      gap: .5rem
+    }
+
+    .fact-meter-icon {
+      font-size: 1.1rem
+    }
+
+    .fact-pattern {
+      font-family: monospace;
+      font-size: .78rem;
+      letter-spacing: .14em;
+      color: var(--saffron);
+      background: rgba(191, 91, 29, .06);
+      padding: .2rem .5rem;
+      border-radius: 4px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .fact-syllables {
+      font-size: .7rem;
+      color: var(--muted)
+    }
+
+    .fact-example {
+      font-size: .72rem;
+      color: var(--teal);
+      font-style: italic;
+      margin-top: .2rem
+    }
+
+    /* ── Vedic notation strip ── */
+    .svara-strip {
+      display: flex;
+      align-items: stretch;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-top: .5rem;
+    }
+
+    .svara-cell {
+      flex: 1;
+      text-align: center;
+      padding: .6rem .4rem;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+    }
+
+    .svara-cell:not(:last-child) {
+      border-right: 1px solid var(--border)
+    }
+
+    .svara-cell.anudatta {
+      background: rgba(95, 111, 137, .08)
+    }
+
+    .svara-cell.svarita {
+      background: rgba(57, 99, 128, .08)
+    }
+
+    .svara-cell.udatta {
+      background: rgba(47, 73, 114, .12)
+    }
+
+    .svara-sym {
+      font-size: 1.1rem
+    }
+
+    .svara-name {
+      font-family: var(--ff-dev);
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--gold2)
+    }
+
+    .svara-meaning {
+      font-size: .62rem;
+      color: var(--muted);
+      letter-spacing: .04em
+    }
+
+    .svara-arrow {
+      font-size: 1rem;
+      color: var(--saffron)
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .72rem;
+      line-height: 1.8;
+      background: linear-gradient(0deg, #f7efe1, var(--bg));
+    }
+
+    footer .f-om {
+      font-family: var(--ff-dev);
+      font-size: 1.1rem;
+      color: var(--saffron);
+      opacity: .8;
+      margin-bottom: .3rem
+    }
+
+    /* ── Tooltip ── */
+    [title] {
+      cursor: help
+    }
+
+    @media(max-width:720px) {
+      .input-grid {
+        grid-template-columns: 1fr
+      }
+
+      .controls-col {
+        flex-direction: row;
+        flex-wrap: wrap
+      }
+
+      .analysis-grid {
+        grid-template-columns: 1fr
+      }
+
+      .header-badge {
+        display: none
+      }
+
+      header::before {
+        display: none
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="top-stripe"></div>
+  <div class="top-stripe"></div>
 
-<header>
-  <div class="logo-wrap">
-    <div class="logo">🕉</div>
-    <div class="logo-sub">ChandaVani</div>
-  </div>
-  <div>
-    <h1>ChandaVani</h1>
-    <p>Sanskrit Melodic Recitation · Chanda + Raga Analysis</p>
-  </div>
-  <div class="header-badge">
-    <span class="badge badge-saffron">⚗ Vedic Prosody Engine</span>
-    <span class="badge badge-blue">🎵 Raga-Aware Synthesis</span>
-  </div>
-</header>
+  <header>
+    <div class="logo-wrap">
+      <div class="logo">🕉</div>
+      <div class="logo-sub">ChandaVani</div>
+    </div>
+    <div>
+      <h1>ChandaVani</h1>
+      <p>Sanskrit Melodic Recitation · Chanda + Raga Analysis</p>
+    </div>
+    <div class="header-badge">
+      <span class="badge badge-saffron">⚗ Vedic Prosody Engine</span>
+      <span class="badge badge-blue">🎵 Raga-Aware Synthesis</span>
+    </div>
+  </header>
 
-<main>
+  <main>
 
-  <!-- Verse of the Day Banner -->
-  <div class="votd-card">
-    <div class="votd-om">ॐ</div>
-    <div class="votd-label">✦ Featured Verse</div>
-    <div class="votd-verse">धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः</div>
-    <div class="votd-translation">"On the holy field of Kurukshetra, assembled together, desirous of battle…"</div>
-    <span class="votd-source">Bhagavad Gita · 1.1 · Anushtubh Chanda</span>
-  </div>
+    <!-- Verse of the Day Banner -->
+    <div class="votd-card">
+      <div class="votd-om">ॐ</div>
+      <div class="votd-label">✦ Featured Verse</div>
+      <div class="votd-verse">धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः</div>
+      <div class="votd-translation">"On the holy field of Kurukshetra, assembled together, desirous of battle…"</div>
+      <span class="votd-source">Bhagavad Gita · 1.1 · Anushtubh Chanda</span>
+    </div>
 
-  <!-- Input Card -->
-  <div class="card">
-    <div class="card-title">📜 Sanskrit Verse</div>
-    <div class="input-grid">
-      <div style="display:flex;flex-direction:column;gap:.6rem">
-        <textarea id="verseInput"
-          placeholder="Enter Sanskrit verse in Devanagari…&#10;e.g. धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः&#10;&#10;Tip: paste one pada per line for best results"></textarea>
-        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-          <button class="btn-recite" id="reciteBtn" onclick="recite()" style="flex:1;min-width:140px">
-            ▶ Recite
-          </button>
-          <button onclick="loadExample()" style="
+    <!-- Input Card -->
+    <div class="card">
+      <div class="card-title">📜 Sanskrit Verse</div>
+      <div class="input-grid">
+        <div style="display:flex;flex-direction:column;gap:.6rem">
+          <textarea id="verseInput"
+            placeholder="Enter Sanskrit verse in Devanagari…&#10;e.g. धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः&#10;&#10;Tip: paste one pada per line for best results"></textarea>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+            <button class="btn-recite" id="reciteBtn" onclick="recite()" style="flex:1;min-width:140px">
+              ▶ Recite
+            </button>
+            <button onclick="loadExample()" style="
             padding:.7rem 1rem;border-radius:8px;border:1px solid var(--border);
             background:transparent;color:var(--muted);cursor:pointer;font-size:.82rem;
             white-space:nowrap;transition:background .15s">
-            Load Example
-          </button>
+              Load Example
+            </button>
+          </div>
+          <div class="status" id="statusMsg">
+            <span class="spinner"></span><span id="statusText">Generating recitation…</span>
+          </div>
         </div>
-        <div class="status" id="statusMsg">
-          <span class="spinner"></span><span id="statusText">Generating recitation…</span>
-        </div>
-      </div>
 
-      <div class="controls-col">
-        <!-- Raga -->
-        <div>
-          <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.4rem">Melodic Framework</div>
-          <select id="frameworkSelect">
-            <option value="paper2_tables">Vedic Pitch Arrays (Research)</option>
-            <option value="raga_bhairav">Raga Bhairav (Dawn)</option>
-            <option value="raga_yaman">Raga Yaman (Evening)</option>
-            <option value="raga_bhairavi">Raga Bhairavi (Morning)</option>
-            <option value="vedic_svara">Vedic Svara (3-level)</option>
-          </select>
+        <div class="controls-col">
+          <!-- Raga -->
+          <div>
+            <div
+              style="font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.4rem">
+              Melodic Framework</div>
+            <select id="frameworkSelect">
+              <option value="paper2_tables">Vedic Pitch Arrays (Research)</option>
+              <option value="raga_bhairav">Raga Bhairav (Dawn)</option>
+              <option value="raga_yaman">Raga Yaman (Evening)</option>
+              <option value="raga_bhairavi">Raga Bhairavi (Morning)</option>
+              <option value="vedic_svara">Vedic Svara (3-level)</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Audio Output -->
-  <div class="card" id="audioCard" style="display:none">
-    <div class="card-title">🔊 Recitation</div>
-    <div class="audio-wrap visible" id="audioWrap">
-      <audio id="audioPlayer" controls></audio>
-      <div class="audio-meta" id="audioMeta"></div>
-    </div>
-  </div>
-
-  <!-- Analysis Row -->
-  <div class="analysis-grid" id="analysisGrid" style="display:none">
-
-    <!-- Syllables Card -->
-    <div class="card" style="grid-column:1/-1">
-      <div class="card-title">🔤 Syllable Analysis</div>
-      <div class="legend">
-        <span><span class="legend-dot" style="background:var(--guru)"></span>Guru (G) — heavy, 2 matras</span>
-        <span><span class="legend-dot" style="background:var(--laghu)"></span>Laghu (L) — light, 1 matra</span>
+    <!-- Note Map — always visible -->
+    <div class="card" id="noteMapCard">
+      <div class="card-title">🎼 Note Map — Sa Re Ga Ma Pa
+        <span id="noteMapSubtitle"
+          style="font-weight:400;font-size:.68rem;color:var(--muted);letter-spacing:.04em;text-transform:none;margin-left:.4rem">12-svara
+          reference · run recitation for verse-specific notes</span>
       </div>
-      <div id="syllableStrip" class="syllable-strip"></div>
-      <div id="glPattern" class="gl-pattern" style="margin-top:.75rem"></div>
-      <!-- Stats -->
-      <div class="stats-row" id="statsRow" style="margin-top:1rem"></div>
-    </div>
-
-    <!-- Note Map card — Sa Re Ga Ma Pa per syllable -->
-    <div class="card" style="grid-column:1/-1">
-      <div class="card-title">🎼 Note Map — Sa Re Ga Ma Pa</div>
       <div id="noteMapWrap">
-        <div class="empty"><span class="empty-icon">🎼</span>Run recitation to see per-syllable notes</div>
+        <!-- Static svara reference shown before any recitation -->
+        <div class="note-map" id="svaraRef">
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(57,99,128,.1);border-color:rgba(57,99,128,.3)">Sa</span><span
+              class="note-pair-note" style="color:var(--teal)">Sa</span><span class="note-pair-hz">130 Hz</span></div>
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(57,99,128,.08);border-color:rgba(57,99,128,.2)">Ri♭</span><span
+              class="note-pair-note" style="color:var(--teal)">Ri♭</span><span class="note-pair-hz">138 Hz</span></div>
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(57,99,128,.08);border-color:rgba(57,99,128,.2)">Ri</span><span
+              class="note-pair-note" style="color:var(--teal)">Ri</span><span class="note-pair-hz">146 Hz</span></div>
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(47,73,114,.07);border-color:rgba(47,73,114,.18)">Ga♭</span><span
+              class="note-pair-note" style="color:var(--gold2)">Ga♭</span><span class="note-pair-hz">155 Hz</span></div>
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(47,73,114,.07);border-color:rgba(47,73,114,.18)">Ga</span><span
+              class="note-pair-note" style="color:var(--gold2)">Ga</span><span class="note-pair-hz">164 Hz</span></div>
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(47,73,114,.07);border-color:rgba(47,73,114,.18)">Ma</span><span
+              class="note-pair-note" style="color:var(--gold2)">Ma</span><span class="note-pair-hz">174 Hz</span></div>
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(47,73,114,.07);border-color:rgba(47,73,114,.18)">Ma♯</span><span
+              class="note-pair-note" style="color:var(--gold2)">Ma♯</span><span class="note-pair-hz">184 Hz</span></div>
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(191,91,29,.1);border-color:rgba(191,91,29,.3);color:var(--saffron);font-weight:800">Pa</span><span
+              class="note-pair-note" style="color:var(--saffron);font-weight:800">Pa ★</span><span
+              class="note-pair-hz">207 Hz</span></div>
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(191,91,29,.07);border-color:rgba(191,91,29,.2)">Dha♭</span><span
+              class="note-pair-note" style="color:var(--saffron)">Dha♭</span><span class="note-pair-hz">219 Hz</span>
+          </div>
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(191,91,29,.07);border-color:rgba(191,91,29,.2)">Dha</span><span
+              class="note-pair-note" style="color:var(--saffron)">Dha</span><span class="note-pair-hz">232 Hz</span>
+          </div>
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(191,91,29,.07);border-color:rgba(191,91,29,.2)">Ni♭</span><span
+              class="note-pair-note" style="color:var(--saffron)">Ni♭</span><span class="note-pair-hz">246 Hz</span>
+          </div>
+          <div class="note-pair"><span class="note-pair-syll"
+              style="background:rgba(191,91,29,.07);border-color:rgba(191,91,29,.2)">Ni</span><span
+              class="note-pair-note" style="color:var(--saffron)">Ni</span><span class="note-pair-hz">261 Hz</span>
+          </div>
+        </div>
+        <div style="margin-top:.6rem;font-size:.65rem;color:var(--muted);font-style:italic">Pa (★) is the reference
+          pitch (207 Hz). Source: Rama &amp; Lakshmanan (2010), Table 2.</div>
       </div>
     </div>
 
-    <!-- Chanda Matches -->
+    <!-- Audio Output -->
+    <div class="card" id="audioCard" style="display:none">
+      <div class="card-title">🔊 Recitation</div>
+      <div class="audio-wrap visible" id="audioWrap">
+        <audio id="audioPlayer" controls></audio>
+        <div class="audio-meta" id="audioMeta"></div>
+      </div>
+    </div>
+
+    <!-- Analysis Row -->
+    <div class="analysis-grid" id="analysisGrid" style="display:none">
+
+      <!-- Syllables Card -->
+      <div class="card" style="grid-column:1/-1">
+        <div class="card-title">🔤 Syllable Analysis</div>
+        <div class="legend">
+          <span><span class="legend-dot" style="background:var(--guru)"></span>Guru (G) — heavy, 2 matras</span>
+          <span><span class="legend-dot" style="background:var(--laghu)"></span>Laghu (L) — light, 1 matra</span>
+        </div>
+        <div id="syllableStrip" class="syllable-strip"></div>
+        <div id="glPattern" class="gl-pattern" style="margin-top:.75rem"></div>
+        <!-- Stats -->
+        <div class="stats-row" id="statsRow" style="margin-top:1rem"></div>
+      </div>
+
+      <!-- Chanda Matches -->
+      <div class="card">
+        <div class="card-title">⚖️ Chanda Detection</div>
+        <div id="chandaMatches">
+          <div class="empty"><span class="empty-icon">⚖️</span>Run recitation first</div>
+        </div>
+      </div>
+
+      <!-- Raga Info -->
+      <div class="card">
+        <div class="card-title">🎵 Melodic Framework</div>
+        <div id="ragaInfo">
+          <div class="empty"><span class="empty-icon">🎵</span>Select a raga above</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Ornamental divider -->
+    <div class="om-divider"><span class="om-glyph">ॐ</span> Chandas — The Metres of the Vedas <span
+        class="om-glyph">ॐ</span></div>
+
+    <!-- Chanda Reference Cards -->
     <div class="card">
-      <div class="card-title">⚖️ Chanda Detection</div>
-      <div id="chandaMatches">
-        <div class="empty"><span class="empty-icon">⚖️</span>Run recitation first</div>
+      <div class="card-title">📖 Common Chanda Metres</div>
+      <div class="chanda-facts-grid">
+        <div class="fact-card">
+          <div class="fact-meter"><span class="fact-meter-icon">🌿</span>Anushtubh</div>
+          <div class="fact-pattern">LLGLGLLG</div>
+          <div class="fact-syllables">8 syllables · 4 padas · 32 total</div>
+          <div class="fact-example">Bhagavad Gita, Ramayana, Mahabharata</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-meter"><span class="fact-meter-icon">☀️</span>Gayatri</div>
+          <div class="fact-pattern">LLGLGLLG</div>
+          <div class="fact-syllables">8 syllables · 3 padas · 24 total</div>
+          <div class="fact-example">Rigveda · Gayatri Mantra (RV 3.62.10)</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-meter"><span class="fact-meter-icon">🏛️</span>Indravajra</div>
+          <div class="fact-pattern">GGLLGGLLGLLGG</div>
+          <div class="fact-syllables">11 syllables · classical Sanskrit</div>
+          <div class="fact-example">Kalidasa · Kumarasambhava</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-meter"><span class="fact-meter-icon">🌸</span>Vasantatilaka</div>
+          <div class="fact-pattern">GGLLLGLLGLLGG</div>
+          <div class="fact-syllables">14 syllables · elaborate metre</div>
+          <div class="fact-example">Kalidasa · Meghaduta</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-meter"><span class="fact-meter-icon">🦁</span>Mandakranta</div>
+          <div class="fact-pattern">GGGGLLLLLGGL</div>
+          <div class="fact-syllables">17 syllables · majestic cadence</div>
+          <div class="fact-example">Meghaduta · Raghuvamsha</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-meter"><span class="fact-meter-icon">📿</span>Trishtubh</div>
+          <div class="fact-pattern">GGLGLLGLLGG</div>
+          <div class="fact-syllables">11 syllables · Vedic corpus</div>
+          <div class="fact-example">Rigveda · Atharva Veda</div>
+        </div>
       </div>
     </div>
 
-    <!-- Raga Info -->
+    <!-- Ornamental divider -->
+    <div class="om-divider"><span class="om-glyph">🎵</span> Vedic Svara System <span class="om-glyph">🎵</span></div>
+
+    <!-- Vedic Svara Info Card -->
     <div class="card">
-      <div class="card-title">🎵 Melodic Framework</div>
-      <div id="ragaInfo">
-        <div class="empty"><span class="empty-icon">🎵</span>Select a raga above</div>
+      <div class="card-title">🎼 The Three Vedic Accents (Svaras)</div>
+      <p style="font-size:.8rem;color:var(--muted);line-height:1.7;margin-bottom:.75rem">
+        Vedic Sanskrit uses a pitch-accent system with three tones. These accents, documented as early as the
+        <em>Rigveda Pratishakhya</em>, govern the melodic shape of each verse.
+      </p>
+      <div class="svara-strip">
+        <div class="svara-cell anudatta">
+          <div class="svara-sym">↓</div>
+          <div class="svara-name">अनुदात्त</div>
+          <div class="svara-meaning">Anudātta</div>
+          <div class="svara-meaning">Low · Receding</div>
+        </div>
+        <div class="svara-cell svarita">
+          <div class="svara-sym">—</div>
+          <div class="svara-name">स्वरित</div>
+          <div class="svara-meaning">Svarita</div>
+          <div class="svara-meaning">Middle · Neutral</div>
+        </div>
+        <div class="svara-cell udatta">
+          <div class="svara-sym">↑</div>
+          <div class="svara-name">उदात्त</div>
+          <div class="svara-meaning">Udātta</div>
+          <div class="svara-meaning">High · Rising</div>
+        </div>
       </div>
     </div>
 
-  </div>
+  </main>
 
-  <!-- Ornamental divider -->
-  <div class="om-divider"><span class="om-glyph">ॐ</span> Chandas — The Metres of the Vedas <span class="om-glyph">ॐ</span></div>
+  <footer>
+    <div class="f-om">ॐ</div>
+    <div>ChandaVani · Sanskrit Melodic Recitation Engine</div>
+    <div style="margin-top:.3rem;opacity:.7">Analysing Vedic prosody · Mapping raga frameworks · Synthesising authentic
+      recitation</div>
+  </footer>
 
-  <!-- Chanda Reference Cards -->
-  <div class="card">
-    <div class="card-title">📖 Common Chanda Metres</div>
-    <div class="chanda-facts-grid">
-      <div class="fact-card">
-        <div class="fact-meter"><span class="fact-meter-icon">🌿</span>Anushtubh</div>
-        <div class="fact-pattern">LLGLGLLG</div>
-        <div class="fact-syllables">8 syllables · 4 padas · 32 total</div>
-        <div class="fact-example">Bhagavad Gita, Ramayana, Mahabharata</div>
-      </div>
-      <div class="fact-card">
-        <div class="fact-meter"><span class="fact-meter-icon">☀️</span>Gayatri</div>
-        <div class="fact-pattern">LLGLGLLG</div>
-        <div class="fact-syllables">8 syllables · 3 padas · 24 total</div>
-        <div class="fact-example">Rigveda · Gayatri Mantra (RV 3.62.10)</div>
-      </div>
-      <div class="fact-card">
-        <div class="fact-meter"><span class="fact-meter-icon">🏛️</span>Indravajra</div>
-        <div class="fact-pattern">GGLLGGLLGLLGG</div>
-        <div class="fact-syllables">11 syllables · classical Sanskrit</div>
-        <div class="fact-example">Kalidasa · Kumarasambhava</div>
-      </div>
-      <div class="fact-card">
-        <div class="fact-meter"><span class="fact-meter-icon">🌸</span>Vasantatilaka</div>
-        <div class="fact-pattern">GGLLLGLLGLLGG</div>
-        <div class="fact-syllables">14 syllables · elaborate metre</div>
-        <div class="fact-example">Kalidasa · Meghaduta</div>
-      </div>
-      <div class="fact-card">
-        <div class="fact-meter"><span class="fact-meter-icon">🦁</span>Mandakranta</div>
-        <div class="fact-pattern">GGGGLLLLLGGL</div>
-        <div class="fact-syllables">17 syllables · majestic cadence</div>
-        <div class="fact-example">Meghaduta · Raghuvamsha</div>
-      </div>
-      <div class="fact-card">
-        <div class="fact-meter"><span class="fact-meter-icon">📿</span>Trishtubh</div>
-        <div class="fact-pattern">GGLGLLGLLGG</div>
-        <div class="fact-syllables">11 syllables · Vedic corpus</div>
-        <div class="fact-example">Rigveda · Atharva Veda</div>
-      </div>
-    </div>
-  </div>
+  <script>
+    const API = "";   // same origin
+    let currentVoice = "male";
 
-  <!-- Ornamental divider -->
-  <div class="om-divider"><span class="om-glyph">🎵</span> Vedic Svara System <span class="om-glyph">🎵</span></div>
+    // ── Example ───────────────────────────────────────────────────────────────────
+    function loadExample() {
+      document.getElementById("verseInput").value =
+        "धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय";
+    }
 
-  <!-- Vedic Svara Info Card -->
-  <div class="card">
-    <div class="card-title">🎼 The Three Vedic Accents (Svaras)</div>
-    <p style="font-size:.8rem;color:var(--muted);line-height:1.7;margin-bottom:.75rem">
-      Vedic Sanskrit uses a pitch-accent system with three tones. These accents, documented as early as the <em>Rigveda Pratishakhya</em>, govern the melodic shape of each verse.
-    </p>
-    <div class="svara-strip">
-      <div class="svara-cell anudatta">
-        <div class="svara-sym">↓</div>
-        <div class="svara-name">अनुदात्त</div>
-        <div class="svara-meaning">Anudātta</div>
-        <div class="svara-meaning">Low · Receding</div>
-      </div>
-      <div class="svara-cell svarita">
-        <div class="svara-sym">—</div>
-        <div class="svara-name">स्वरित</div>
-        <div class="svara-meaning">Svarita</div>
-        <div class="svara-meaning">Middle · Neutral</div>
-      </div>
-      <div class="svara-cell udatta">
-        <div class="svara-sym">↑</div>
-        <div class="svara-name">उदात्त</div>
-        <div class="svara-meaning">Udātta</div>
-        <div class="svara-meaning">High · Rising</div>
-      </div>
-    </div>
-  </div>
+    // ── Recite ────────────────────────────────────────────────────────────────────
+    async function recite() {
+      const verse = document.getElementById("verseInput").value.trim();
+      const framework = document.getElementById("frameworkSelect").value;
+      if (!verse) { alert("Please enter a Sanskrit verse."); return; }
 
-</main>
+      // Split lines into padas
+      const padas = verse.split("\n").map(l => l.trim()).filter(Boolean);
 
-<footer>
-  <div class="f-om">ॐ</div>
-  <div>ChandaVani · Sanskrit Melodic Recitation Engine</div>
-  <div style="margin-top:.3rem;opacity:.7">Analysing Vedic prosody · Mapping raga frameworks · Synthesising authentic recitation</div>
-</footer>
+      showStatus("Generating recitation…");
 
-<script>
-const API     = "";   // same origin
-let currentVoice = "male";
+      try {
+        const res = await fetch(`${API}/recite`, {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ padas, framework, voice: currentVoice }),
+        });
+        if (!res.ok) throw new Error(await res.text());
+        const data = await res.json();
 
-// ── Example ───────────────────────────────────────────────────────────────────
-function loadExample() {
-  document.getElementById("verseInput").value =
-    "धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय";
-}
+        renderAudio(data);
+        renderSyllables(data.padas);
+        renderNoteMap(data.padas);
+        document.getElementById('noteMapSubtitle').textContent = 'Syllable → svara mapping for this verse';
+        renderChanda(data.chanda_scores);
+        renderRaga(framework, data.padas);
 
-// ── Recite ────────────────────────────────────────────────────────────────────
-async function recite() {
-  const verse   = document.getElementById("verseInput").value.trim();
-  const framework = document.getElementById("frameworkSelect").value;
-  if (!verse) { alert("Please enter a Sanskrit verse."); return; }
+        document.getElementById("audioCard").style.display = "";
+        document.getElementById("analysisGrid").style.display = "grid";
+        hideStatus();
+      } catch (e) {
+        hideStatus();
+        alert("Error: " + e.message + "\n\nIs the server running?  python -m uvicorn app:app --port 8000");
+      }
+    }
 
-  // Split lines into padas
-  const padas = verse.split("\n").map(l=>l.trim()).filter(Boolean);
+    // ── Audio ─────────────────────────────────────────────────────────────────────
+    function renderAudio(data) {
+      const wav = "data:audio/wav;base64," + data.audio_b64;
+      const player = document.getElementById("audioPlayer");
+      player.src = wav;
+      player.play().catch(() => { });
 
-  showStatus("Generating recitation…");
-
-  try {
-    const res  = await fetch(`${API}/recite`, {
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({ padas, framework, voice: currentVoice }),
-    });
-    if (!res.ok) throw new Error(await res.text());
-    const data = await res.json();
-
-    renderAudio(data);
-    renderSyllables(data.padas);
-    renderNoteMap(data.padas);
-    renderChanda(data.chanda_scores);
-    renderRaga(framework, data.padas);
-
-    document.getElementById("audioCard").style.display = "";
-    document.getElementById("analysisGrid").style.display = "grid";
-    hideStatus();
-  } catch(e) {
-    hideStatus();
-    alert("Error: " + e.message + "\n\nIs the server running?  python -m uvicorn app:app --port 8000");
-  }
-}
-
-// ── Audio ─────────────────────────────────────────────────────────────────────
-function renderAudio(data) {
-  const wav = "data:audio/wav;base64," + data.audio_b64;
-  const player = document.getElementById("audioPlayer");
-  player.src = wav;
-  player.play().catch(()=>{});
-
-  const dur_s  = (data.total_ms / 1000).toFixed(1);
-  const chanda = data.detected_chanda;
-  const n_G = data.padas.flatMap(p=>p.syllables).filter(s=>s.gl==="G").length;
-  const n_L = data.padas.flatMap(p=>p.syllables).filter(s=>s.gl==="L").length;
-  document.getElementById("audioMeta").innerHTML = `
+      const dur_s = (data.total_ms / 1000).toFixed(1);
+      const chanda = data.detected_chanda;
+      const n_G = data.padas.flatMap(p => p.syllables).filter(s => s.gl === "G").length;
+      const n_L = data.padas.flatMap(p => p.syllables).filter(s => s.gl === "L").length;
+      document.getElementById("audioMeta").innerHTML = `
     <span>⏱ ${dur_s}s</span>
     <span>⚖️ ${chanda}</span>
     <span>🔤 ${n_G + n_L} syllables</span>
     <a href="${wav}" download="chandavani.wav" style="color:var(--muted);font-size:.72rem">⬇ Download</a>
   `;
-}
-
-// ── Syllables ─────────────────────────────────────────────────────────────────
-function renderSyllables(padas) {
-  const strip = document.getElementById("syllableStrip");
-  const pat   = document.getElementById("glPattern");
-  const statsRow = document.getElementById("statsRow");
-
-  let html = ""; let glStr = ""; let glAll = [];
-  let n_G = 0, n_L = 0, total_ms = 0;
-
-  padas.forEach((pada, pi) => {
-    if (pi > 0) {
-      html  += `<div class="chip-sep" title="Pada break"></div>`;
-      glStr += " · ";
     }
-    pada.syllables.forEach(s => {
-      html += `
+
+    // ── Syllables ─────────────────────────────────────────────────────────────────
+    function renderSyllables(padas) {
+      const strip = document.getElementById("syllableStrip");
+      const pat = document.getElementById("glPattern");
+      const statsRow = document.getElementById("statsRow");
+
+      let html = ""; let glStr = ""; let glAll = [];
+      let n_G = 0, n_L = 0, total_ms = 0;
+
+      padas.forEach((pada, pi) => {
+        if (pi > 0) {
+          html += `<div class="chip-sep" title="Pada break"></div>`;
+          glStr += " · ";
+        }
+        pada.syllables.forEach(s => {
+          html += `
         <div class="syl-chip chip-${s.gl}" title="${s.pitch} · ${s.hz}Hz · ${s.dur_ms}ms">
           <span class="syl-text">${s.syll}</span>
           <span class="syl-weight">${s.gl}</span>
         </div>`;
-      glStr += `<span class="gl-${s.gl}">${s.gl}</span>`;
-      glAll.push(s.gl);
-      if (s.gl === "G") n_G++; else n_L++;
-      total_ms += s.dur_ms;
-    });
-  });
+          glStr += `<span class="gl-${s.gl}">${s.gl}</span>`;
+          glAll.push(s.gl);
+          if (s.gl === "G") n_G++; else n_L++;
+          total_ms += s.dur_ms;
+        });
+      });
 
-  strip.innerHTML = html;
-  pat.innerHTML   = glStr;
+      strip.innerHTML = html;
+      pat.innerHTML = glStr;
 
-  statsRow.innerHTML = `
+      statsRow.innerHTML = `
     <div class="stat-box">
       <div class="stat-num" style="color:var(--guru)">${n_G}</div>
       <div class="stat-lbl">Guru</div>
@@ -650,89 +1287,96 @@ function renderSyllables(padas) {
       <div class="stat-lbl">Total Syllables</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num">${(total_ms/1000).toFixed(1)}s</div>
+      <div class="stat-num">${(total_ms / 1000).toFixed(1)}s</div>
       <div class="stat-lbl">Duration</div>
     </div>
   `;
-}
-
-// ── Note Map (Sa Re Ga Ma Pa per syllable) ───────────────────────────────────
-// Semitone offsets from Pa=0, matching melodic.py NOTE_OFFSET
-const SVARA_TABLE = [
-  { name:"Sa",  st:-7 }, { name:"Ri♭", st:-6 }, { name:"Ri",  st:-5 },
-  { name:"Ga♭", st:-4 }, { name:"Ga",  st:-3 }, { name:"Ma",  st:-2 },
-  { name:"Ma♯", st:-1 }, { name:"Pa",  st: 0 }, { name:"Dha♭",st: 1 },
-  { name:"Dha", st: 2 }, { name:"Ni♭", st: 3 }, { name:"Ni",  st: 4 },
-];
-const PA_HZ_REF = 207.0;  // matches audio.py calibrated reference
-
-function hzToSvara(hz) {
-  if (!hz || hz <= 0) return "—";
-  // Convert hz to semitones relative to PA_HZ_REF
-  // Allow octave-folding: normalise to within one octave of Pa
-  let st = 12 * Math.log2(hz / PA_HZ_REF);
-  // fold into -7..+4 range (one octave around Pa)
-  while (st > 5)  st -= 12;
-  while (st < -8) st += 12;
-  // nearest svara
-  return SVARA_TABLE.reduce((best, s) =>
-    Math.abs(s.st - st) < Math.abs(best.st - st) ? s : best
-  ).name;
-}
-
-const SVARA_COLOR = {
-  "Sa":"var(--teal)", "Ri♭":"var(--teal)", "Ri":"var(--teal)",
-  "Ga♭":"var(--gold2)", "Ga":"var(--gold2)",
-  "Ma":"var(--gold2)", "Ma♯":"var(--gold2)",
-  "Pa":"var(--saffron)",
-  "Dha♭":"var(--saffron)", "Dha":"var(--saffron)",
-  "Ni♭":"var(--saffron)", "Ni":"var(--saffron)",
-};
-
-function renderNoteMap(padas) {
-  const wrap = document.getElementById("noteMapWrap");
-  if (!padas || !padas.length) { wrap.innerHTML = ''; return; }
-
-  let html = "";
-  padas.forEach((pada, pi) => {
-    if (pi > 0) {
-      html += `<div class="note-map-sep" title="Pada break"></div>`;
     }
-    pada.syllables.forEach(s => {
-      // Prefer a named label if the backend returned one (raga/svara modes),
-      // otherwise derive svara name from Hz (paper2_tables mode)
-      const rawLabel = s.pitch || "";
-      const isHz     = /^\d+(\.\d+)?Hz?$/i.test(rawLabel.trim());
-      const note     = (!rawLabel || isHz) ? hzToSvara(s.hz) : rawLabel;
-      const col      = SVARA_COLOR[note] || "var(--gold2)";
-      html += `
-        <div class="note-pair" title="${s.syll} → ${note} · ${s.hz} Hz">
-          <span class="note-pair-syll">${s.syll}</span>
+
+    // ── Note Map (Sa Re Ga Ma Pa per syllable) ───────────────────────────────────
+    // Semitone offsets from Pa=0, matching melodic.py NOTE_OFFSET
+    const SVARA_TABLE = [
+      { name: "Sa", st: -7 }, { name: "Ri♭", st: -6 }, { name: "Ri", st: -5 },
+      { name: "Ga♭", st: -4 }, { name: "Ga", st: -3 }, { name: "Ma", st: -2 },
+      { name: "Ma♯", st: -1 }, { name: "Pa", st: 0 }, { name: "Dha♭", st: 1 },
+      { name: "Dha", st: 2 }, { name: "Ni♭", st: 3 }, { name: "Ni", st: 4 },
+    ];
+    const PA_HZ_REF = 207.0;  // matches audio.py calibrated reference
+
+    function hzToSvara(hz) {
+      if (!hz || hz <= 0) return "—";
+      // Convert hz to semitones relative to PA_HZ_REF
+      // Allow octave-folding: normalise to within one octave of Pa
+      let st = 12 * Math.log2(hz / PA_HZ_REF);
+      // fold into -7..+4 range (one octave around Pa)
+      while (st > 5) st -= 12;
+      while (st < -8) st += 12;
+      // nearest svara
+      return SVARA_TABLE.reduce((best, s) =>
+        Math.abs(s.st - st) < Math.abs(best.st - st) ? s : best
+      ).name;
+    }
+
+    const SVARA_COLOR = {
+      "Sa": "var(--teal)", "Ri♭": "var(--teal)", "Ri": "var(--teal)",
+      "Ga♭": "var(--gold2)", "Ga": "var(--gold2)",
+      "Ma": "var(--gold2)", "Ma♯": "var(--gold2)",
+      "Pa": "var(--saffron)",
+      "Dha♭": "var(--saffron)", "Dha": "var(--saffron)",
+      "Ni♭": "var(--saffron)", "Ni": "var(--saffron)",
+    };
+
+    function renderNoteMap(padas) {
+      const wrap = document.getElementById("noteMapWrap");
+      if (!padas || !padas.length) return;
+
+      let html = "";
+      padas.forEach((pada, pi) => {
+        if (pi > 0) {
+          html += `<div class="note-map-sep" title="Pada ${pi + 1}"></div>`;
+        }
+        pada.syllables.forEach(s => {
+          // Use named pitch label if backend returned one (raga/svara modes),
+          // otherwise convert Hz → nearest svara name (paper2_tables mode)
+          const rawLabel = s.pitch || "";
+          const isHz = /^\d+(\.\d+)?Hz?$/i.test(rawLabel.trim());
+          const note = (!rawLabel || isHz) ? hzToSvara(s.hz) : rawLabel;
+          const col = SVARA_COLOR[note] || "var(--gold2)";
+          const glBg = s.gl === "G"
+            ? "background:rgba(95,111,137,.1);border-color:rgba(95,111,137,.3)"
+            : "background:rgba(47,73,114,.07);border-color:rgba(47,73,114,.18)";
+          html += `
+        <div class="note-pair" title="${s.syll} → ${note} · ${s.hz} Hz · ${s.gl}">
+          <span class="note-pair-syll" style="${glBg}">${s.syll}</span>
           <span class="note-pair-note" style="color:${col}">${note}</span>
           <span class="note-pair-hz">${s.hz} Hz</span>
         </div>`;
-    });
-  });
+        });
+      });
 
-  wrap.innerHTML = `<div class="note-map">${html}</div>`;
-}
+      wrap.innerHTML = `<div class="note-map">${html}</div>
+    <div style="margin-top:.6rem;font-size:.65rem;color:var(--muted);font-style:italic">
+      Guru syllables shown with grey background · Laghu with blue · Pa (207 Hz) is reference pitch.
+      Source: Rama &amp; Lakshmanan (2010), Table 2.
+    </div>`;
+    }
 
-// ── Chanda Matches (no percentage bars) ──────────────────────────────────────
-function renderChanda(scores) {
-  const el    = document.getElementById("chandaMatches");
-  const descs = {
-    "Anushtubh":    "Most common · 8 syl/pada · Gita, Ramayana",
-    "Gayatri":      "Sacred Vedic · 8×3 · Gayatri Mantra",
-    "Indravajra":   "Stately · 11 syl · Kalidasa",
-    "Upendravajra": "Classical · 11 syl · variant of Indravajra",
-    "Vasantatilaka":"Elegant · 14 syl · Meghaduta",
-    "Mandakranta":  "Majestic · 17 syl · Meghaduta",
-    "Trishtubh":    "Ancient · 11 syl · Rigveda",
-    "Jagati":       "Classical · 12 syl · Rigveda",
-  };
-  const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
-  const selectedChanda = sorted[0][0];
-  el.innerHTML = sorted.map(([name], idx) => `
+    // ── Chanda Matches (no percentage bars) ──────────────────────────────────────
+    function renderChanda(scores) {
+      const el = document.getElementById("chandaMatches");
+      const descs = {
+        "Anushtubh": "Most common · 8 syl/pada · Gita, Ramayana",
+        "Gayatri": "Sacred Vedic · 8×3 · Gayatri Mantra",
+        "Indravajra": "Stately · 11 syl · Kalidasa",
+        "Upendravajra": "Classical · 11 syl · variant of Indravajra",
+        "Vasantatilaka": "Elegant · 14 syl · Meghaduta",
+        "Mandakranta": "Majestic · 17 syl · Meghaduta",
+        "Trishtubh": "Ancient · 11 syl · Rigveda",
+        "Jagati": "Classical · 12 syl · Rigveda",
+      };
+      const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      const selectedChanda = sorted[0][0];
+      el.innerHTML = sorted.map(([name], idx) => `
     <div class="match-row ${name === selectedChanda ? 'selected' : ''}">
       <div>
         <div class="match-name">${name}</div>
@@ -743,62 +1387,62 @@ function renderChanda(scores) {
       </span>
     </div>
   `).join("");
-}
+    }
 
-// ── Raga Info ─────────────────────────────────────────────────────────────────
-const RAGA_DATA = {
-  "paper2_tables": {
-    name: "Vedic Pitch Arrays",
-    mood: "Research-calibrated · empirical note sequences",
-    desc: "Per-syllable pitch values from Rama & Lakshmanan (2010), Tables 3-4. Measured from actual Vedic recitation. Best accuracy for authentic chanting.",
-    aroha: ["Based on meter-specific empirical data"],
-    avaroha: [],
-  },
-  "raga_bhairav": {
-    name: "Raga Bhairav",
-    mood: "Dawn · Austere · Devotional",
-    desc: "The raga of Lord Shiva. Deeply meditative, performed at dawn. Used for Vedic mantras and Shiva stotras.",
-    aroha:   ["Sa","Re♭","Ga","Ma","Pa","Dha♭","Ni","Sa'"],
-    avaroha: ["Sa'","Ni","Dha♭","Pa","Ma","Ga","Re♭","Sa"],
-    vadi: "Dha♭", samvadi: "Re♭",
-  },
-  "raga_yaman": {
-    name: "Raga Yaman",
-    mood: "Evening · Expansive · Peaceful",
-    desc: "One of the most beloved Hindustani ragas, performed in the evening. Expansive, devotional quality with teevra Ma.",
-    aroha:   ["Sa","Re","Ga","Ma♯","Pa","Dha","Ni","Sa'"],
-    avaroha: ["Sa'","Ni","Dha","Pa","Ma♯","Ga","Re","Sa"],
-    vadi: "Ga", samvadi: "Ni",
-  },
-  "raga_bhairavi": {
-    name: "Raga Bhairavi",
-    mood: "Morning · Tender · Emotional",
-    desc: "The farewell raga — played last in concerts. Deeply emotional and devotional. All komal (flat) notes except Ma and Pa.",
-    aroha:   ["Sa","Re♭","Ga♭","Ma","Pa","Dha♭","Ni♭","Sa'"],
-    avaroha: ["Sa'","Ni♭","Dha♭","Pa","Ma","Ga♭","Re♭","Sa"],
-    vadi: "Ma", samvadi: "Sa",
-  },
-  "vedic_svara": {
-    name: "Vedic Svara",
-    mood: "Classical · 3-level accent system",
-    desc: "The traditional Vedic pitch accent: Anudatta (low), Svarita (middle), Udatta (high). Used in Rigveda recitation.",
-    aroha:   ["Anudatta (↓)","Svarita (—)","Udatta (↑)"],
-    avaroha: [],
-  },
-};
+    // ── Raga Info ─────────────────────────────────────────────────────────────────
+    const RAGA_DATA = {
+      "paper2_tables": {
+        name: "Vedic Pitch Arrays",
+        mood: "Research-calibrated · empirical note sequences",
+        desc: "Per-syllable pitch values from Rama & Lakshmanan (2010), Tables 3-4. Measured from actual Vedic recitation. Best accuracy for authentic chanting.",
+        aroha: ["Based on meter-specific empirical data"],
+        avaroha: [],
+      },
+      "raga_bhairav": {
+        name: "Raga Bhairav",
+        mood: "Dawn · Austere · Devotional",
+        desc: "The raga of Lord Shiva. Deeply meditative, performed at dawn. Used for Vedic mantras and Shiva stotras.",
+        aroha: ["Sa", "Re♭", "Ga", "Ma", "Pa", "Dha♭", "Ni", "Sa'"],
+        avaroha: ["Sa'", "Ni", "Dha♭", "Pa", "Ma", "Ga", "Re♭", "Sa"],
+        vadi: "Dha♭", samvadi: "Re♭",
+      },
+      "raga_yaman": {
+        name: "Raga Yaman",
+        mood: "Evening · Expansive · Peaceful",
+        desc: "One of the most beloved Hindustani ragas, performed in the evening. Expansive, devotional quality with teevra Ma.",
+        aroha: ["Sa", "Re", "Ga", "Ma♯", "Pa", "Dha", "Ni", "Sa'"],
+        avaroha: ["Sa'", "Ni", "Dha", "Pa", "Ma♯", "Ga", "Re", "Sa"],
+        vadi: "Ga", samvadi: "Ni",
+      },
+      "raga_bhairavi": {
+        name: "Raga Bhairavi",
+        mood: "Morning · Tender · Emotional",
+        desc: "The farewell raga — played last in concerts. Deeply emotional and devotional. All komal (flat) notes except Ma and Pa.",
+        aroha: ["Sa", "Re♭", "Ga♭", "Ma", "Pa", "Dha♭", "Ni♭", "Sa'"],
+        avaroha: ["Sa'", "Ni♭", "Dha♭", "Pa", "Ma", "Ga♭", "Re♭", "Sa"],
+        vadi: "Ma", samvadi: "Sa",
+      },
+      "vedic_svara": {
+        name: "Vedic Svara",
+        mood: "Classical · 3-level accent system",
+        desc: "The traditional Vedic pitch accent: Anudatta (low), Svarita (middle), Udatta (high). Used in Rigveda recitation.",
+        aroha: ["Anudatta (↓)", "Svarita (—)", "Udatta (↑)"],
+        avaroha: [],
+      },
+    };
 
-function renderRaga(framework, padas) {
-  const el   = document.getElementById("ragaInfo");
-  const info = RAGA_DATA[framework] || RAGA_DATA["paper2_tables"];
-  const hasScale = info.aroha.length > 1;
+    function renderRaga(framework, padas) {
+      const el = document.getElementById("ragaInfo");
+      const info = RAGA_DATA[framework] || RAGA_DATA["paper2_tables"];
+      const hasScale = info.aroha.length > 1;
 
-  // Extract note sequence from first pada
-  let noteSequence = [];
-  if (padas && padas.length > 0) {
-    noteSequence = padas[0].syllables.map(s => s.pitch);
-  }
+      // Extract note sequence from first pada
+      let noteSequence = [];
+      if (padas && padas.length > 0) {
+        noteSequence = padas[0].syllables.map(s => s.pitch);
+      }
 
-  el.innerHTML = `
+      el.innerHTML = `
     <div style="margin-bottom:.75rem">
       <div style="font-size:.95rem;font-weight:600;color:var(--gold2);margin-bottom:.2rem">${info.name}</div>
       <div style="font-size:.75rem;color:var(--saffron);margin-bottom:.5rem">${info.mood}</div>
@@ -807,37 +1451,38 @@ function renderRaga(framework, padas) {
     ${noteSequence.length > 0 ? `
       <div style="margin-bottom:.5rem">
         <div class="raga-label">Note Sequence (Pada 1)</div>
-        <div class="note-seq">${noteSequence.map(n=>`<span class="note-chip">${n}</span>`).join("")}</div>
+        <div class="note-seq">${noteSequence.map(n => `<span class="note-chip">${n}</span>`).join("")}</div>
       </div>` : ""}
     ${hasScale ? `
       <div style="margin-bottom:.5rem">
         <div class="raga-label">Aroha (Ascending)</div>
-        <div class="note-seq">${info.aroha.map(n=>`<span class="note-chip">${n}</span>`).join("")}</div>
+        <div class="note-seq">${info.aroha.map(n => `<span class="note-chip">${n}</span>`).join("")}</div>
       </div>
       ${info.avaroha.length ? `
         <div>
           <div class="raga-label">Avaroha (Descending)</div>
-          <div class="note-seq">${info.avaroha.map(n=>`<span class="note-chip">${n}</span>`).join("")}</div>
+          <div class="note-seq">${info.avaroha.map(n => `<span class="note-chip">${n}</span>`).join("")}</div>
         </div>` : ""}
       ${info.vadi ? `
         <div style="margin-top:.6rem;display:flex;gap:1rem">
           <div><div class="raga-label">Vadi</div><div class="raga-value" style="color:var(--gold2)">${info.vadi}</div></div>
           <div><div class="raga-label">Samvadi</div><div class="raga-value" style="color:var(--gold)">${info.samvadi}</div></div>
         </div>` : ""}
-    ` : `<div class="note-seq">${info.aroha.map(n=>`<span class="note-chip">${n}</span>`).join("")}</div>`}
+    ` : `<div class="note-seq">${info.aroha.map(n => `<span class="note-chip">${n}</span>`).join("")}</div>`}
   `;
-}
+    }
 
-// ── Status ────────────────────────────────────────────────────────────────────
-function showStatus(msg) {
-  document.getElementById("statusText").textContent = msg;
-  document.getElementById("statusMsg").style.display = "block";
-  document.getElementById("reciteBtn").disabled = true;
-}
-function hideStatus() {
-  document.getElementById("statusMsg").style.display = "none";
-  document.getElementById("reciteBtn").disabled = false;
-}
-</script>
+    // ── Status ────────────────────────────────────────────────────────────────────
+    function showStatus(msg) {
+      document.getElementById("statusText").textContent = msg;
+      document.getElementById("statusMsg").style.display = "block";
+      document.getElementById("reciteBtn").disabled = true;
+    }
+    function hideStatus() {
+      document.getElementById("statusMsg").style.display = "none";
+      document.getElementById("reciteBtn").disabled = false;
+    }
+  </script>
 </body>
+
 </html>
